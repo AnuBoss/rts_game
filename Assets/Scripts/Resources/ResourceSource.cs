@@ -35,7 +35,6 @@ public class ResourceSource : MonoBehaviour
     [SerializeField]
     private UnityEvent onInfoQuantityChange;
 
-
     // Start is called before the first frame update
     void Start()
     {

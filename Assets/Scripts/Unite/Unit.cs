@@ -11,6 +11,10 @@ public enum UnitState
     Building,
     MoveToBuild,
     BuildProgress,
+    MoveToResource,
+    Gather,
+    DeliverToHQ,
+    StoretoHQ,
     Die
 }
 
@@ -83,6 +87,13 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private Builder builder;
     public Builder Builder { get { return builder; } }
+    
+    [SerializeField] private bool isWorker;
+    public bool IsWorker { get { return isWorker; } set { isWorker = value; } }
+
+    [SerializeField] private Worker worker;
+    public Worker Worker { get { return worker; } }
+
 
     // Start is called before the first frame update
     void Start()
@@ -106,6 +117,10 @@ public class Unit : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
         if (IsBuilder)
             builder = GetComponent<Builder>();
+        if (IsWorker)
+        {
+            worker = GetComponent<Worker>();
+        }
     }
 
     public void ToggleSelectionVisual(bool flag)
