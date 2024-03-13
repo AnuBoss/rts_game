@@ -112,6 +112,10 @@ public class Command : MonoBehaviour
             curUnit.ToggleSelectionVisual(false);
         if (curBuilding != null)
             curBuilding.ToggleSelectionVisual(false);
+        if (curResource != null)
+        {
+            curResource.ToggleSelectionVisual(false);
+        }
 
 
 
