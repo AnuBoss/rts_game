@@ -43,6 +43,10 @@ public class Factions : MonoBehaviour
     [SerializeField] private Transform ghostBuildingParent;
     public Transform GhostBuildingParent { get { return ghostBuildingParent; } }
 
+    [SerializeField]
+    private Transform startPosition; //start position for Faction
+    public Transform StartPosition { get { return startPosition; } }
+
     
 
 
@@ -117,4 +121,38 @@ public class Factions : MonoBehaviour
 
         return true;
     }
+    
+    public Vector3 GetHQSpawnPos()
+    {
+        foreach (Building b in aliveBuildings)
+        {
+            if (b.IsHQ)
+                return b.SpawnPoint.position;
+        }
+        return startPosition.position;
+    }
+    
+    public void GainResource(ResourceType resourceType, int amount)
+    {
+        switch (resourceType)
+        {
+            case ResourceType.Food:
+                food += amount;
+                break;
+            case ResourceType.Wood:
+                wood += amount;
+                break;
+            case ResourceType.Gold:
+                gold += amount;
+                break;
+            case ResourceType.Stone:
+                stone += amount;
+                break;
+        }
+
+        if (this == GameManager.instance.MyFaction)
+            MainUI.instance.UpdateAllResource(this);
+    }
+
+
 }
