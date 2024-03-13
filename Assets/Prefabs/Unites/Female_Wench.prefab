@@ -1751,7 +1751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f717b8fe090e9846b2afaab6e6723f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3
+  id: 1
   unitName: 
   unitPic: {fileID: 0}
   curHP: 0
@@ -1773,6 +1773,10 @@ MonoBehaviour:
   unitWaitTime: 0.1
   isBuilder: 0
   builder: {fileID: 0}
+  isWorker: 0
+  worker: {fileID: 0}
+  pathUpdateRate: 1
+  lastPathUpdateTime: 0
 --- !u!114 &7463390359000238070
 MonoBehaviour:
   m_ObjectHideFlags: 0

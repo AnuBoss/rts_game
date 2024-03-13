@@ -154,9 +154,9 @@ MonoBehaviour:
   rallyPoint: {fileID: 7238685263350252381}
   unitPrefabs:
   - {fileID: 186328, guid: cb1d3b14a96f88647a73a8bf71224399, type: 3}
-  - {fileID: 145884, guid: f725d918129d69848a395da5d3d992a3, type: 3}
-  - {fileID: 186328, guid: 134d6a4262f1c0c498a03b6fc4bc39a1, type: 3}
   - {fileID: 128380, guid: 8037cab5ee96c0343a2eb0f8f0eccb3e, type: 3}
+  - {fileID: 186328, guid: 134d6a4262f1c0c498a03b6fc4bc39a1, type: 3}
+  - {fileID: 132726, guid: db27b775979374d49a27f3f9ef25a6da, type: 3}
   recruitList: []
   unitTimer: 0
   curUnitProgress: 0
