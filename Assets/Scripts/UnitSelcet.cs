@@ -20,6 +20,9 @@ public class Command : MonoBehaviour
     [SerializeField]
     private Building curBuilding; //current selected single building
     public Building CurBuilding { get { return curBuilding; } }
+    
+    [SerializeField]
+    private ResourceSource curResource; //current selected resource
 
 
 
@@ -94,6 +97,10 @@ public class Command : MonoBehaviour
                 case "Building":
                      BuildingSelect(hit);
                     break;
+                
+                case "Resource":
+                    ResourceSelect(hit);
+                    break;
 
             }
         }
@@ -152,6 +159,21 @@ public class Command : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
     }
 
+    private void ShowResource()
+    {
+        InfoManager.instance.ShowAllInfo(curResource);//Show resource info in Info Panel
+
+    }
+
+    private void ResourceSelect(RaycastHit hit)
+    {
+        curResource = hit.collider.GetComponent<ResourceSource>();
+        if (curResource == null)
+            return;
+
+        curResource.ToggleSelectionVisual(true);
+        ShowResource();//Show resource info
+    }
 
 
 
