@@ -31,7 +31,7 @@ public class UnitAnimation : MonoBehaviour
         anim.SetBool("IsGather", false);
         anim.SetBool("IsMoveToResource", false);
         anim.SetBool("IsDeliverToHQ", false);
-        anim.SetBool("ISStoretoHQ", false);
+        anim.SetBool("IsStoretoHQ", false);
 
         switch (u.State)
         {
