@@ -1718,7 +1718,7 @@ MonoBehaviour:
   armour: 2
   visualRange: 10
   weaponRange: 10
-  state: 0
+  state: 10
   faction: {fileID: 0}
   selectionVisual: {fileID: 7311936789775952688}
   unitCost:

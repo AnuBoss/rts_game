@@ -43,6 +43,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: IsGather
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMove To Resource
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1900665668233086901}
   m_Solo: 0
@@ -79,6 +82,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: IsGather
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: IsMove To Resource
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -137,7 +146,7 @@ AnimatorStateMachine:
     m_Position: {x: -50, y: -110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1900665668233086901}
-    m_Position: {x: 270, y: 40, z: 0}
+    m_Position: {x: 350, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4436355027685034453}
     m_Position: {x: 377.2472, y: 188.61392, z: 0}
@@ -161,7 +170,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Villager@Gathering01
+  m_Name: Gathering
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -197,6 +206,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: IsGather
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMove To Resource
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6573615821438222920}
   m_Solo: 0
@@ -227,6 +239,9 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: IsGather
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMove To Resource
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4436355027685034453}
