@@ -1709,7 +1709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   unitName: Worker
-  unitPic: {fileID: 0}
+  unitPic: {fileID: 21300000, guid: 92eafd58803363646aa5e73e6680ee59, type: 3}
   curHP: 100
   maxHP: 100
   moveSpeed: 10
