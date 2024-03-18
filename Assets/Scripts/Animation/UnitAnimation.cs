@@ -28,6 +28,10 @@ public class UnitAnimation : MonoBehaviour
         anim.SetBool("IsMove", false);
         anim.SetBool("IsAttack", false);
         anim.SetBool("IsBuilding", false);
+        anim.SetBool("IsGather", false);
+        anim.SetBool("IsMoveToResource", false);
+        anim.SetBool("IsDeliverToHQ", false);
+        anim.SetBool("ISStoretoHQ", false);
 
         switch (u.State)
         {
@@ -40,10 +44,22 @@ public class UnitAnimation : MonoBehaviour
             case UnitState.Attack:
                 anim.SetBool("IsAttack", true);
                 break;
-
             case UnitState.Building:
                 anim.SetBool("IsBuilding", true);
                 break;
+            case UnitState.MoveToResource:
+                anim.SetBool("IsMoveToResource", true);
+                break;
+            case UnitState.Gather:
+                anim.SetBool("IsGather", true);
+                break;
+            case UnitState.DeliverToHQ:
+                anim.SetBool("IsDeliverToHQ", true);
+                break;
+            case UnitState.StoretoHQ:
+                anim.SetBool("IsStoretoHQ", true);
+                break;
+
 
         }
     }
