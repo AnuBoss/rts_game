@@ -99,7 +99,7 @@ public class ActionManager : MonoBehaviour
     {
         //Debug.Log("1 - Click Button: " + n);
 
-        Unit unit = Command.instance.CurUnit;
+        Unit unit = Command.instance.CurUnits[0];
         if (unit.IsBuilder)
             unit.Builder.ToCreateNewBuilding(n );
 
