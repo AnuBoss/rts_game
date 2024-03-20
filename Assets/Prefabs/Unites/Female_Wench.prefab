@@ -1634,6 +1634,7 @@ GameObject:
   - component: {fileID: -3845987789507650221}
   - component: {fileID: 280705258897768013}
   - component: {fileID: 7463390359000238070}
+  - component: {fileID: 1961592466137893858}
   m_Layer: 0
   m_Name: Female_Wench
   m_TagString: Untagged
@@ -1777,6 +1778,10 @@ MonoBehaviour:
   worker: {fileID: 0}
   pathUpdateRate: 1
   lastPathUpdateTime: 0
+  curEnemyUnitTarget: {fileID: 0}
+  attackRate: 1
+  lastAttackTime: 0
+  defendRange: 30
 --- !u!114 &7463390359000238070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1787,6 +1792,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca83c7267804155428bda5340b224e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1961592466137893858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7122834fbf52d4c8e2777ac9d85865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &129178

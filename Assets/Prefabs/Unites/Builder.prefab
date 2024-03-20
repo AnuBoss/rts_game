@@ -5144,6 +5144,7 @@ GameObject:
   - component: {fileID: -3292919181529568665}
   - component: {fileID: 7839105422635206200}
   - component: {fileID: 5323839149414798676}
+  - component: {fileID: -639673576698925474}
   m_Layer: 6
   m_Name: Builder
   m_TagString: Unit
@@ -5264,6 +5265,10 @@ MonoBehaviour:
   worker: {fileID: 0}
   pathUpdateRate: 1
   lastPathUpdateTime: 0
+  curEnemyUnitTarget: {fileID: 0}
+  attackRate: 1
+  lastAttackTime: 0
+  defendRange: 30
 --- !u!114 &-1780159808539133477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5340,6 +5345,18 @@ MonoBehaviour:
   amountCarry: 0
   maxCarry: 25
   carryType: 0
+--- !u!114 &-639673576698925474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7122834fbf52d4c8e2777ac9d85865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &186630
 GameObject:
   m_ObjectHideFlags: 0

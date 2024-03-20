@@ -1613,6 +1613,7 @@ GameObject:
   - component: {fileID: -1688659521673234537}
   - component: {fileID: -1789320506704501040}
   - component: {fileID: 7996922102880443900}
+  - component: {fileID: -6660156131927683816}
   m_Layer: 6
   m_Name: Worker
   m_TagString: Unit
@@ -1733,6 +1734,10 @@ MonoBehaviour:
   worker: {fileID: 0}
   pathUpdateRate: 1
   lastPathUpdateTime: 0
+  curEnemyUnitTarget: {fileID: 0}
+  attackRate: 1
+  lastAttackTime: 0
+  defendRange: 30
 --- !u!114 &-1688659521673234537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1786,6 +1791,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-6660156131927683816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec7122834fbf52d4c8e2777ac9d85865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &133380
 GameObject:
   m_ObjectHideFlags: 0
