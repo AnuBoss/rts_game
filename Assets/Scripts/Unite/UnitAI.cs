@@ -71,6 +71,10 @@ public class UnitAI : MonoBehaviour
     
     protected void Check()
     {
+        if (unit.CurHP <= 0)
+        {
+            return;
+        }
         if (!unit.IsWorker && !unit.IsBuilder)// if a unit is a fighter
         {
             // check if we have nearby enemies - if so, attack them
@@ -82,9 +86,52 @@ public class UnitAI : MonoBehaviour
                 {
                     unit.ToAttackUnit(enemy);
                 }
+               
             }
         }
     }
+    
+    // checks for nearby enemy buildings with a sphere cast
+    protected Building CheckForNearbyEnemyBuildings()
+    {
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, unit.DefendRange, Vector3.up, buildingLayerMask);
+
+        GameObject closest = null;
+        float closestDist = 0.0f;
+
+        for (int x = 0; x < hits.Length; x++)
+        {
+            //Debug.Log("Test - " + hits[x].collider.gameObject.ToString());
+            Building target = hits[x].collider.GetComponent<Building>();
+            // skip if this is not a building or destroyed
+            if ((target == null) || (target.CurHP <= 0))
+                continue;
+
+            // skip if it is a natural/neutral Building
+            if (target.Factions == null)
+                continue;
+
+            // is this my building?
+            else if (unit.Factions.IsMyBuilding(target))
+                continue;
+
+            // if it is not the closest enemy building or the distance is less than the closest distance it currently has
+            else if (!closest || (Vector3.Distance(transform.position, hits[x].transform.position) < closestDist))
+            {
+                closest = hits[x].collider.gameObject;
+                closestDist = Vector3.Distance(transform.position, hits[x].transform.position);
+            }
+        }
+
+        if (closest != null)
+        {
+            //Debug.Log(closest.gameObject.ToString() + ", " + closestDist.ToString());
+            return closest.GetComponent<Building>();
+        }
+        else
+            return null;
+    }
+
 
 
 

@@ -182,6 +182,10 @@ public class Command : MonoBehaviour
             //Debug.Log("my building");
             ShowBuilding(curBuilding);//Show building info
         }
+        else
+        {
+            ShowEnemyBuilding(curBuilding);
+        }
     }
 
     public void LookAt(Vector3 pos)
@@ -255,6 +259,12 @@ public class Command : MonoBehaviour
     {
         InfoManager.instance.ShowEnemyAllInfo(u);
     }
+    
+    private void ShowEnemyBuilding(Building b)
+    {
+        InfoManager.instance.ShowEnemyAllInfo(b);
+    }
+
 
 
 
