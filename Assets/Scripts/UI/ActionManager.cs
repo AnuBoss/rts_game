@@ -90,7 +90,7 @@ public class ActionManager : MonoBehaviour
 
     public void CreateUnitButton(int n)//Map with Create Unit Btns
     {
-        //Debug.Log("Create " + n);
+        Debug.Log("Create " + n);
        Command.instance.CurBuilding.ToCreateUnit(n);
 
     }
