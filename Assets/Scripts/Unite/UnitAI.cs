@@ -86,6 +86,15 @@ public class UnitAI : MonoBehaviour
                 {
                     unit.ToAttackUnit(enemy);
                 }
+                else
+                {
+                    Building potentialEnemyBuilding = CheckForNearbyEnemyBuildings();
+
+                    if (potentialEnemyBuilding != null) 
+                    {
+                        unit.ToAttackBuilding(potentialEnemyBuilding);
+                    }
+                }
                
             }
         }
@@ -101,7 +110,7 @@ public class UnitAI : MonoBehaviour
 
         for (int x = 0; x < hits.Length; x++)
         {
-            //Debug.Log("Test - " + hits[x].collider.gameObject.ToString());
+            Debug.Log("Test - " + hits[x].collider.gameObject.ToString());
             Building target = hits[x].collider.GetComponent<Building>();
             // skip if this is not a building or destroyed
             if ((target == null) || (target.CurHP <= 0))
@@ -125,7 +134,7 @@ public class UnitAI : MonoBehaviour
 
         if (closest != null)
         {
-            //Debug.Log(closest.gameObject.ToString() + ", " + closestDist.ToString());
+            Debug.Log(closest.gameObject.ToString() + ", " + closestDist.ToString());
             return closest.GetComponent<Building>();
         }
         else
