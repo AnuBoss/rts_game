@@ -5239,7 +5239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f717b8fe090e9846b2afaab6e6723f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
+  id: 0
   unitName: Builder
   unitPic: {fileID: 21300000, guid: f04b71b1829d76e45b3935d61ae01225, type: 3}
   curHP: 100

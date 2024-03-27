@@ -5237,7 +5237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f717b8fe090e9846b2afaab6e6723f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   unitName: Brit.soler
   unitPic: {fileID: 21300000, guid: 1c408e93a40730b4591d5dd6ba9805bb, type: 3}
   curHP: 100
@@ -5264,6 +5264,7 @@ MonoBehaviour:
   pathUpdateRate: 1
   lastPathUpdateTime: 0
   curEnemyUnitTarget: {fileID: 0}
+  curEnemyBuildingTarget: {fileID: 0}
   attackRate: 1
   lastAttackTime: 0
   defendRange: 30

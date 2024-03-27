@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: -3440016314393012977}
   - component: {fileID: 5264968979148803043}
   m_Layer: 2
-  m_Name: Headquarter ghost
+  m_Name: Fr_Headquarter ghost
   m_TagString: GhostBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

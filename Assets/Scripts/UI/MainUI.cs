@@ -41,7 +41,7 @@ public class MainUI : MonoBehaviour
 
     public void UpdateAllResource(Factions faction)
     {
-        unitCountText.text = faction.AliveUnits.Count.ToString();
+        unitCountText.text = $"{faction.AliveUnits.Count}/{faction.UnitLimit}";
         foodText.text = faction.Food.ToString();
         woodText.text = faction.Wood.ToString();
         goldText.text = faction.Gold.ToString();
