@@ -71,7 +71,7 @@ public class UnitAI : MonoBehaviour
     
     protected void Check()
     {
-        if (unit.CurHP <= 0)
+        if (unit.CurHP <= 0 || unit.State == UnitState.Die)
         {
             return;
         }
