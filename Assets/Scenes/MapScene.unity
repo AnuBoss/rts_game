@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -395,6 +395,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5940825515296532090, guid: cb1d3b14a96f88647a73a8bf71224399, type: 3}
+      propertyPath: faction
+      value: 
+      objectReference: {fileID: 924194017}
     - target: {fileID: 186328, guid: cb1d3b14a96f88647a73a8bf71224399, type: 3}
       propertyPath: m_Name
       value: Soldier
@@ -409,7 +413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427352, guid: cb1d3b14a96f88647a73a8bf71224399, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.88
+      value: 265
       objectReference: {fileID: 0}
     - target: {fileID: 427352, guid: cb1d3b14a96f88647a73a8bf71224399, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4967,7 +4971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6217695237204968363, guid: f60c8e0315b89f046a20d4abf4921af0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44.5
+      value: 189
       objectReference: {fileID: 0}
     - target: {fileID: 6217695237204968363, guid: f60c8e0315b89f046a20d4abf4921af0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4975,7 +4979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6217695237204968363, guid: f60c8e0315b89f046a20d4abf4921af0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -58
+      value: -31
       objectReference: {fileID: 0}
     - target: {fileID: 6217695237204968363, guid: f60c8e0315b89f046a20d4abf4921af0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6080,7 +6084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 427352, guid: 134d6a4262f1c0c498a03b6fc4bc39a1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.126
+      value: 319.026
       objectReference: {fileID: 0}
     - target: {fileID: 427352, guid: 134d6a4262f1c0c498a03b6fc4bc39a1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7053,7 +7057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 453744, guid: 8037cab5ee96c0343a2eb0f8f0eccb3e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 308.9
       objectReference: {fileID: 0}
     - target: {fileID: 453744, guid: 8037cab5ee96c0343a2eb0f8f0eccb3e, type: 3}
       propertyPath: m_LocalRotation.w
