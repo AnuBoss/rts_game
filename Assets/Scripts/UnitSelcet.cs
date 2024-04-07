@@ -34,6 +34,9 @@ public class Command : MonoBehaviour
     [SerializeField]
     private Unit curEnemy;
 
+    private float timer = 0f;
+    private float timeLimit = 0.5f;
+
 
 
     // Start is called before the first frame update
@@ -43,6 +46,13 @@ public class Command : MonoBehaviour
         layerMask = LayerMask.GetMask("Unit", "Building", "Resource", "Ground");
         selectionBox = MainUI.instance.SelectionBox;
         instance = this;
+
+        timer += Time.deltaTime;
+        if (timer >= timeLimit)
+        {
+            timer = 0f;
+            UpdateUI();
+        }
 
     }
 
@@ -155,6 +165,8 @@ public class Command : MonoBehaviour
         ClearAllSelectionVisual();
         curUnits.Clear();
         curBuilding = null;
+        curResource = null;
+        curEnemy = null;
         InfoManager.instance.ClearAllInfo();
         
     }
@@ -263,6 +275,23 @@ public class Command : MonoBehaviour
     private void ShowEnemyBuilding(Building b)
     {
         InfoManager.instance.ShowEnemyAllInfo(b);
+    }
+
+    private void UpdateUI()
+    {
+        if (curUnits.Count == 1)
+            ShowUnit(curUnits[0]);
+        else if (curEnemy != null)
+            showEnemyUnit(curEnemy);
+        else if (curResource != null)
+            ShowResource();
+        else if (curBuilding != null)
+        {
+            if (GameManager.instance.MyFaction.IsMyBuilding(curBuilding))
+                ShowBuilding(curBuilding);//Show building info
+            else
+                ShowEnemyBuilding(curBuilding);
+        }
     }
 
 
