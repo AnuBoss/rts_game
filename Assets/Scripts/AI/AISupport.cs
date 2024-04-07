@@ -69,7 +69,7 @@ public class AISupport : MonoBehaviour
         barracks.Clear();
         foreach (Building b in faction.AliveBuildings)
         { 
-            if(b.gameObject == null)
+            if(b == null)
                 continue;
 
             if(b.IsHQ)
