@@ -231,7 +231,10 @@ public class Factions : MonoBehaviour
             unitLimit = 0;
 
         if( this == GameManager.instance.MyFaction)
-            MainUI.instance.UpdateAllResource(this);
+        { 
+            MainUI.instance.UpdateAllResource(this); 
+        }
+            
     }
     
     public bool CheckUnitCost(int i)
