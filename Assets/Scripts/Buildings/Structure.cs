@@ -53,7 +53,7 @@ public abstract class  Structure : MonoBehaviour
         
     }
     
-    protected void Die()
+    protected virtual void Die()
     {
         InfoManager.instance.ClearAllInfo();
         Destroy(gameObject);

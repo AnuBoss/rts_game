@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 965010630385729216}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -53.93, y: -2.87, z: 8.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -116,8 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   structureName: House
   structurePic: {fileID: 21300000, guid: 9e46164f8ee1b35428d826ed2ba8541f, type: 3}
-  curHP: 50
-  maxHP: 50
+  curHP: 100
+  maxHP: 100
   faction: {fileID: 0}
   selectionVisual: {fileID: 6478526406359241696}
   structureCost:
@@ -184,7 +184,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 14.1, y: 10, z: 14.3}
-  m_Center: {x: 53.86, y: 5, z: -8.07}
+  m_Center: {x: -1.3, y: 7, z: -0.76}
 --- !u!208 &1471016820496986402
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -199,7 +199,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 54.31, y: 5, z: -9}
+  m_Center: {x: -1.34, y: 7, z: -0.36}
   m_TimeToStationary: 0.5
 --- !u!1001 &190407009712679962
 PrefabInstance:
