@@ -5322,13 +5322,13 @@ MonoBehaviour:
   buildingList:
   - {fileID: 5250158733978268878, guid: 987c9ae1b9f47074c9f5159d0990049a, type: 3}
   - {fileID: 1071407829796553401, guid: f60c8e0315b89f046a20d4abf4921af0, type: 3}
-  - {fileID: 8377964963199095463, guid: 871473de7d42d364cbc84206e4a3d989, type: 3}
   - {fileID: 4429410582896392359, guid: 9990f8b78964b604395388e9e93c8399, type: 3}
+  - {fileID: 8377964963199095463, guid: 871473de7d42d364cbc84206e4a3d989, type: 3}
   ghostBuildingList:
   - {fileID: 5250158733978268878, guid: 3befe68585feb124fad21efc5e66d774, type: 3}
   - {fileID: 1071407829796553401, guid: 63015da3b3e00c44a893bfb6f909fa21, type: 3}
-  - {fileID: 8377964963199095463, guid: daec160523d3bca4793ce6302cf026ae, type: 3}
   - {fileID: 4429410582896392359, guid: 469e92dc1200d30409e057d859c44668, type: 3}
+  - {fileID: 8377964963199095463, guid: daec160523d3bca4793ce6302cf026ae, type: 3}
   newBuilding: {fileID: 0}
   ghostBuilding: {fileID: 0}
   inProgressBuilding: {fileID: 0}
