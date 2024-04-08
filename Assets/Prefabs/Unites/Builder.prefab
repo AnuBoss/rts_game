@@ -5261,7 +5261,7 @@ MonoBehaviour:
   unitWaitTime: 0.1
   isBuilder: 1
   builder: {fileID: 0}
-  isWorker: 0
+  isWorker: 1
   worker: {fileID: 0}
   pathUpdateRate: 1
   lastPathUpdateTime: 0

@@ -67,7 +67,7 @@ public class Building : Structure
                     curUnitProgress++;
                     unitTimer = 0f;
 
-                    if (curUnitProgress >= 10)
+                    if (curUnitProgress >= 10 && faction.AliveUnits.Count < faction.UnitLimit)
                     {
                         curUnitProgress = 0;
                         curUnitWaitTime = 0f;

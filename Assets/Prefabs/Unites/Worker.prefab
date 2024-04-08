@@ -1728,7 +1728,7 @@ MonoBehaviour:
     gold: 0
     stone: 0
   unitWaitTime: 0.1
-  isBuilder: 0
+  isBuilder: 1
   builder: {fileID: 0}
   isWorker: 1
   worker: {fileID: 0}
