@@ -1697,11 +1697,11 @@ PrefabInstance:
     - target: {fileID: 7693200448185356632, guid: 090f1be5c11f85b4085690bc5cd453ce, type: 3}
       propertyPath: buildingPrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 4429410582896392359, guid: c3338b32d27f1af4eb0cdbd3f12b70fb, type: 3}
+      objectReference: {fileID: 8377964963199095463, guid: c31e1820818ab184bb4afc954431b08d, type: 3}
     - target: {fileID: 7693200448185356632, guid: 090f1be5c11f85b4085690bc5cd453ce, type: 3}
       propertyPath: buildingPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 8377964963199095463, guid: c31e1820818ab184bb4afc954431b08d, type: 3}
+      objectReference: {fileID: 4429410582896392359, guid: c3338b32d27f1af4eb0cdbd3f12b70fb, type: 3}
     - target: {fileID: 7693200448185356632, guid: 090f1be5c11f85b4085690bc5cd453ce, type: 3}
       propertyPath: buildingPrefabs.Array.data[4]
       value: 
@@ -1725,11 +1725,11 @@ PrefabInstance:
     - target: {fileID: 7693200448185356632, guid: 090f1be5c11f85b4085690bc5cd453ce, type: 3}
       propertyPath: ghostBuildingPrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 4429410582896392359, guid: da477153c2293354ab4f1b8faebf9a09, type: 3}
+      objectReference: {fileID: 8377964963199095463, guid: 23a75f966b2ff08459580830a65fb6f0, type: 3}
     - target: {fileID: 7693200448185356632, guid: 090f1be5c11f85b4085690bc5cd453ce, type: 3}
       propertyPath: ghostBuildingPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 8377964963199095463, guid: 23a75f966b2ff08459580830a65fb6f0, type: 3}
+      objectReference: {fileID: 4429410582896392359, guid: da477153c2293354ab4f1b8faebf9a09, type: 3}
     - target: {fileID: 8075970092325127282, guid: 090f1be5c11f85b4085690bc5cd453ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
