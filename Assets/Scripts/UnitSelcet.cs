@@ -9,7 +9,7 @@ public class Command : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
 
-    [SerializeField] private List<Unit> curUnits;
+    [SerializeField] private List<Unit> curUnits = new List<Unit>();
     public List<Unit> CurUnits
     {
         get { return curUnits; }
