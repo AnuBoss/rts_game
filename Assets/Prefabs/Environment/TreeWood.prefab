@@ -170,7 +170,19 @@ MonoBehaviour:
   selectionVisual: {fileID: 8446850723152992218}
   onRsrcQuantityChange:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 920902709296085397}
+        m_TargetAssemblyTypeName: ResourceUI, Assembly-CSharp
+        m_MethodName: OnQuantityChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onInfoQuantityChange:
     m_PersistentCalls:
       m_Calls: []
@@ -253,6 +265,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4509296424702836}
     m_Modifications:
+    - target: {fileID: 5110762511127015958, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286453893632073263, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}
+      propertyPath: resource
+      value: 
+      objectReference: {fileID: 6317103912668798747}
+    - target: {fileID: 6286453893632073263, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}
+      propertyPath: resourceText
+      value: 
+      objectReference: {fileID: 2981572530036232589}
     - target: {fileID: 7177643134555818166, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -299,11 +323,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7177643134555818166, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9238795
       objectReference: {fileID: 0}
     - target: {fileID: 7177643134555818166, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.38268346
       objectReference: {fileID: 0}
     - target: {fileID: 7177643134555818166, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}
       propertyPath: m_LocalRotation.y
@@ -342,6 +366,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}
+--- !u!114 &920902709296085397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6286453893632073263, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}
+  m_PrefabInstance: {fileID: 6627694055306700730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d9e286e78528543a2b5c28bdebf8ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2981572530036232589 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8258160031675545143, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}
+  m_PrefabInstance: {fileID: 6627694055306700730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4064024526042607372 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7177643134555818166, guid: 97102f2861d88154ebb7bd6fb8159cad, type: 3}

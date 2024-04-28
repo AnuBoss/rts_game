@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: -4182912811329542026}
   - component: {fileID: 6286453893632073263}
   m_Layer: 9
-  m_Name: 'ResourceUI '
+  m_Name: ResourceUI  1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &8274682487192518967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,4 +263,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceText: {fileID: 8258160031675545143}
-  resource: {fileID: 6317103912668798747, guid: 42154c3406f8f9045ab676c05d7ef50d, type: 3}
+  resource: {fileID: 4360741997741772253, guid: 6a09cc1753d962c4386f6f8ab7fad2f4, type: 3}
