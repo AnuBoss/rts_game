@@ -167,7 +167,6 @@ GameObject:
   - component: {fileID: -1727022246261156370}
   - component: {fileID: 8590343388751734897}
   - component: {fileID: 4237166014148717355}
-  - component: {fileID: 2367989449497271316}
   m_Layer: 2
   m_Name: Br_FortTower ghost
   m_TagString: GhostBuilding
@@ -314,18 +313,6 @@ MonoBehaviour:
   - {fileID: 8529890555730756222}
   - {fileID: 386150944730744700}
   planeRdr: {fileID: 2392263215690130934}
---- !u!114 &2367989449497271316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8377964963199095463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9781436b8e333e4484db804396d4a8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &10206430310750698
 PrefabInstance:
   m_ObjectHideFlags: 0
