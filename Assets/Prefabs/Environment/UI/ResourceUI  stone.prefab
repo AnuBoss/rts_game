@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: -4182912811329542026}
   - component: {fileID: 6286453893632073263}
   m_Layer: 9
-  m_Name: ResourceUI  1
+  m_Name: ResourceUI  stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
