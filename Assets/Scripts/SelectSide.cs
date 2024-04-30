@@ -23,4 +23,6 @@ public class SelectSide : MonoBehaviour
        Settings.SelectSide(i);
         GoToChooseMap();
     }
+
+   
 }
