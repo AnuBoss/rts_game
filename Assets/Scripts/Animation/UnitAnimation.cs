@@ -36,7 +36,9 @@ public class UnitAnimation : MonoBehaviour
         anim.SetBool("IsAttackBuilding", false); 
         anim.SetBool("IsMoveToEnemyBuilding", false);
         anim.SetBool("IsMoveToEnemy", false);
-        
+        anim.SetBool("IsMoveToBuilding", false);
+
+
 
         switch (u.State)
         {
@@ -76,7 +78,9 @@ public class UnitAnimation : MonoBehaviour
             case UnitState.MoveToEnemy:
                 anim.SetBool("IsMoveToEnemy", true);
                 break;
-
+            case UnitState.MoveToBuild:
+                anim.SetBool("IsMoveToBuilding", true);
+                break;
         }
     }
 }

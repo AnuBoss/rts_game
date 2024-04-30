@@ -12,6 +12,7 @@ public class VisibilityManager : MonoBehaviour
     List<MiniMapBlip> enemyBuildingBlips = new List<MiniMapBlip>();
 
     public static VisibilityManager instance;
+    private object blip;
 
     // Start is called before the first frame update
     void Start()
@@ -55,8 +56,9 @@ public class VisibilityManager : MonoBehaviour
             //set the unit's 3D model to be seen or not
             foreach (Renderer r in targetBlip.GetComponentsInChildren<Renderer>())
                 r.enabled = seen;
+           // Debug.Log(blip.gameObject);
 
-           
+
         }
     }
 

@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   structureName: FortTower
-  structurePic: {fileID: 0}
+  structurePic: {fileID: 21300000, guid: 2120995078d93964ab948e8aa4012ceb, type: 3}
   curHP: 100
   maxHP: 100
   faction: {fileID: 0}
