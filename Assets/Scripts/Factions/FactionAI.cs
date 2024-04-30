@@ -44,7 +44,7 @@ public class FactionAI : MonoBehaviour
         //Create Workers
         if (curHQ != null)
         {
-            if ((support.Workers.Count + curHQ.CheckNumInRecruitList(0)) < 5 ) // if there are less than 5 units, keep recruiting Workers
+            if ((support.Workers.Count + curHQ.CheckNumInRecruitList(0)) < 6 ) // if there are less than 5 units, keep recruiting Workers
             {
                 // if we can recruit a new worker/builder, do so
                 if (faction.CheckUnitCost(0))
