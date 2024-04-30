@@ -5145,6 +5145,7 @@ GameObject:
   - component: {fileID: 7839105422635206200}
   - component: {fileID: 5323839149414798676}
   - component: {fileID: -639673576698925474}
+  - component: {fileID: -1772526718153425071}
   m_Layer: 6
   m_Name: Builder
   m_TagString: Unit
@@ -5360,6 +5361,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec7122834fbf52d4c8e2777ac9d85865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1772526718153425071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9781436b8e333e4484db804396d4a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &186630

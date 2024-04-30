@@ -2828,6 +2828,7 @@ GameObject:
   - component: {fileID: 8203470213783495120}
   - component: {fileID: 5335247187752552051}
   - component: {fileID: -6546146743950287514}
+  - component: {fileID: -3306003510656199678}
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Unit
@@ -2972,6 +2973,7 @@ MonoBehaviour:
   pathUpdateRate: 1
   lastPathUpdateTime: 0
   curEnemyUnitTarget: {fileID: 0}
+  curEnemyBuildingTarget: {fileID: 0}
   attackRate: 1
   lastAttackTime: 0
   defendRange: 30
@@ -2997,6 +2999,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec7122834fbf52d4c8e2777ac9d85865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3306003510656199678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9781436b8e333e4484db804396d4a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &147900
