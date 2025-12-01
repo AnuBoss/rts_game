@@ -24,7 +24,7 @@ public class VisibilityManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time = Time.deltaTime;
+        time += Time.deltaTime;
         if (time >= timeLimit) 
         {
             time = 0;
