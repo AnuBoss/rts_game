@@ -45,7 +45,7 @@ public class Builder : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (EventSystem.current.IsPointerOverGameObject()) ;
+                if (EventSystem.current.IsPointerOverGameObject()) return;
                 CheckClickOnGround();
             }
 
@@ -61,6 +61,7 @@ public class Builder : MonoBehaviour
                 MoveToBuild(inProgressBuilding);
                 break;
             case UnitState.BuildProgress:
+            case UnitState.Building:
                 BuildProgress();
                 break;
         }
@@ -180,7 +181,7 @@ public class Builder : MonoBehaviour
         Ray ray = CameraController.instance.Cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Ground")))
         {
             bool canBuild = ghostBuilding.GetComponent<FindBuildingSite>().CanBuild;
             //Debug.Log(hit.collider.tag);
