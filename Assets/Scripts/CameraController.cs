@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
     {
         instance = this;
         cam = Camera.main;
-
+       
         newRotation = transform.rotation;
         rotationAmount = 1;
     }
