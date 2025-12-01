@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -25,7 +25,11 @@ public class Builder : MonoBehaviour
 
     private Unit unit;
     private bool building = false;
-   
+
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip constructionSound; // เสียงตอกค้อน (เล่นวนทุกครั้งที่ Progress ขึ้น)
+    [SerializeField] private AudioClip finishBuildingSound; // เสียงสร้างเสร็จ ("Job Done!")
+
 
     // Start is called before the first frame update
     void Start()
@@ -228,6 +232,15 @@ public class Builder : MonoBehaviour
             b.CurHP++;
             unit.SetState(UnitState.Building);
 
+            if (unit.SelectionVisual != null && unit.SelectionVisual.activeSelf)
+            {
+                if (unit.AudioSourceRef != null && constructionSound != null)
+                {
+                    unit.AudioSourceRef.pitch = Random.Range(0.8f, 1.2f);
+                    unit.AudioSourceRef.PlayOneShot(constructionSound);
+                    unit.AudioSourceRef.pitch = 1f;
+                }
+            }
 
             if (b.IsFunctional == false) //if this building is being built, not being fixed
                 //Raise up building from the ground
@@ -238,6 +251,11 @@ public class Builder : MonoBehaviour
             {
                 b.CurHP = b.MaxHP;
                 b.IsFunctional = true;
+
+                if (unit.AudioSourceRef != null && finishBuildingSound != null)
+                {
+                    unit.AudioSourceRef.PlayOneShot(finishBuildingSound);
+                }
 
                 inProgressBuilding = null; //Clear this job off his mind
                 unit.SetState(UnitState.Idle);

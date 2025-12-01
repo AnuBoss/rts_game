@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -120,6 +120,17 @@ public class Unit : MonoBehaviour
     [SerializeField] private float defendRange = 30f; //the range that a unit will defensively auto-attack
     public float DefendRange { get { return defendRange; } }
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource;
+    public AudioSource AudioSourceRef { get { return audioSource; } }
+
+    [SerializeField] private AudioClip attackSound;      // เสียงโจมตี
+    [SerializeField] private AudioClip dieSound;         // เสียงตาย
+
+    // เสียงเก็บทรัพยากร
+    [SerializeField] private AudioClip woodChopSound;    // เสียงตัดไม้
+    [SerializeField] private AudioClip stoneMiningSound; // เสียงขุดหิน/แร่
+
 
     // Start is called before the first frame update
     void Start()
@@ -153,6 +164,8 @@ public class Unit : MonoBehaviour
     private void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
+        if (audioSource == null) audioSource = GetComponent<AudioSource>(); // กันลืมใส่
+
         if (IsBuilder)
             builder = GetComponent<Builder>();
         if (IsWorker)
@@ -222,6 +235,8 @@ public class Unit : MonoBehaviour
         navAgent.isStopped = true;
 
         SetState(UnitState.Die);
+
+        if (audioSource && dieSound) audioSource.PlayOneShot(dieSound);
 
         if (faction != null)
             faction.AliveUnits.Remove(this);
@@ -303,6 +318,10 @@ public class Unit : MonoBehaviour
         if (Time.time - lastAttackTime > attackRate)
         {
             lastAttackTime = Time.time;
+            if (selectionVisual != null && selectionVisual.activeSelf)
+            {
+                if (audioSource && attackSound) audioSource.PlayOneShot(attackSound);
+            }
             curEnemyUnitTarget.TakeDamage(this, UnityEngine.Random.Range(minWpnDamage, maxWpnDamage + 1));
         }
 
@@ -365,7 +384,7 @@ public class Unit : MonoBehaviour
         if (Time.time - lastAttackTime > attackRate)
         {
             lastAttackTime = Time.time;
-
+            if (audioSource && attackSound) audioSource.PlayOneShot(attackSound);
             curEnemyBuildingTarget.TakeDamage(UnityEngine.Random.Range(minWpnDamage, maxWpnDamage + 1));
         }
 
@@ -404,6 +423,28 @@ public class Unit : MonoBehaviour
             ToAttackTurret(turret); //counter-attack at turret
     }
 
+    public void PlayGatherSound(ResourceType type)
+    {
+        if (audioSource == null) return;
 
+        if (selectionVisual == null || !selectionVisual.activeSelf)
+            return;
+
+        // สุ่ม Pitch เล็กน้อยให้เสียงไม่ซ้ำ
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+
+        switch (type)
+        {
+            case ResourceType.Wood:
+                if (woodChopSound) audioSource.PlayOneShot(woodChopSound);
+                break;
+            case ResourceType.Stone: // หรือ Ore, Gold แล้วแต่ Enum ของคุณ
+            case ResourceType.Gold:
+                if (stoneMiningSound) audioSource.PlayOneShot(stoneMiningSound);
+                break;
+           
+        }
+        audioSource.pitch = 1f; // คืนค่า
+    }
 
 }

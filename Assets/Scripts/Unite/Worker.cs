@@ -29,6 +29,7 @@ public class Worker : MonoBehaviour
     private float lastGatherTime;
     private Unit unit;
     
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,6 +98,8 @@ public class Worker : MonoBehaviour
             {
                 if (curResourceSource != null)
                 {
+                    unit.PlayGatherSound(curResourceSource.RsrcType);
+
                     curResourceSource.GatherResource(gatherAmount);
 
                     carryType = curResourceSource.RsrcType;
