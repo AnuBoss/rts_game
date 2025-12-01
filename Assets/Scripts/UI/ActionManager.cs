@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +18,11 @@ public class ActionManager : MonoBehaviour
         cg = GetComponent<CanvasGroup>();
     }
 
+    private void Start()
+    {
+        // [เพิ่ม] เริ่มเกมมาสั่งซ่อน Panel ปุ่มกดไปก่อน
+        ClearAllInfo();
+    }
     private void HideCreateUnitButtons()
     {
         for (int i = 0; i < unitBtns.Length; i++)
@@ -37,10 +42,30 @@ public class ActionManager : MonoBehaviour
     {
         HideCreateUnitButtons();
         HideCreateBuildingButtons();
+
+        // [เพิ่ม] สั่งซ่อน Panel หลักด้วย CanvasGroup
+        if (cg != null)
+        {
+            cg.alpha = 0; // ปรับให้โปร่งใส
+            cg.blocksRaycasts = false; // ปิดการคลิก
+            cg.interactable = false;
+        }
+    }
+
+    private void ShowPanel()
+    {
+        if (cg != null)
+        {
+            cg.alpha = 1;
+            cg.blocksRaycasts = true;
+            cg.interactable = true;
+        }
     }
 
     private void ShowCreateUnitButtons(Building b)
     {
+       
+
         if (b.IsFunctional)
         {
             for (int i = 0; i < b.UnitPrefabs.Length; i++)
@@ -78,13 +103,19 @@ public class ActionManager : MonoBehaviour
 
     public void ShowCreateUnitMode(Building b)
     {
-        ClearAllInfo();
+       
+
+        HideCreateUnitButtons();     // เคลียร์ปุ่มเก่า
+        HideCreateBuildingButtons(); // เคลียร์ปุ่มเก่า
+        ShowPanel();                 // [เพิ่ม] สั่งเปิด Panel ขึ้นมา
         ShowCreateUnitButtons(b);
     }
 
     public void ShowBuilderMode(Unit unit)
     {
-        ClearAllInfo();
+        HideCreateUnitButtons();
+        HideCreateBuildingButtons();
+        ShowPanel();                // [เพิ่ม] สั่งเปิด Panel ขึ้นมา
         ShowCreateBuildingButtons(unit);
     }
 
