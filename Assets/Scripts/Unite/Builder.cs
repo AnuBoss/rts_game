@@ -5,60 +5,59 @@ using UnityEngine.EventSystems;
 
 public class Builder : MonoBehaviour
 {
+    [SerializeField] private bool toBuild = false;
+    [SerializeField] private bool showGhost = false;
 
-    [SerializeField] private bool toBuild = false; //this builder has duty to build things
-    [SerializeField] private bool showGhost = false; //ghost building is showing
-
-    [SerializeField] private GameObject[] buildingList; // Buildings that this unit can build
+    [SerializeField] private GameObject[] buildingList;
     public GameObject[] BuildingList { get { return buildingList; } }
-    [SerializeField] private GameObject[] ghostBuildingList; // Transparent buildings according to building list
+    [SerializeField] private GameObject[] ghostBuildingList;
 
-    [SerializeField] private GameObject newBuilding; // Current building to build
+    [SerializeField] private GameObject newBuilding;
     public GameObject NewBuilding { get { return newBuilding; } set { newBuilding = value; } }
 
-    [SerializeField] private GameObject ghostBuilding; // Tranparent building to check site to build
+    [SerializeField] private GameObject ghostBuilding;
     public GameObject GhostBuilding { get { return ghostBuilding; } set { ghostBuilding = value; } }
 
     [SerializeField] private GameObject inProgressBuilding;
-
     public GameObject InProgressBuilding { get { return inProgressBuilding; } set { inProgressBuilding = value; } }
 
     private Unit unit;
     private bool building = false;
 
     [Header("Audio Settings")]
-    [SerializeField] private AudioClip constructionSound; // เสียงตอกค้อน (เล่นวนทุกครั้งที่ Progress ขึ้น)
-    [SerializeField] private AudioClip finishBuildingSound; // เสียงสร้างเสร็จ ("Job Done!")
+    [SerializeField] private AudioClip constructionSound;
+    [SerializeField] private AudioClip finishBuildingSound;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        unit=GetComponent<Unit>();
+        unit = GetComponent<Unit>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (unit.State == UnitState.Die)
             return;
 
-        if (toBuild) // if this unit is to build something
+        if (toBuild)
         {
+            // 1. อัปเดตตำแหน่ง Ghost Building ตลอดเวลา (ถ้าไม่ได้กด UI)
             GhostBuildingFollowsMouse();
 
+            // 2. เช็คการคลิกซ้ายเพื่อสร้าง
             if (Input.GetMouseButtonDown(0))
             {
-                if (EventSystem.current.IsPointerOverGameObject()) return;
+                // ถ้าเมาส์ชี้บน UI (ปุ่ม/Panel) ให้ยกเลิกการคลิกวางสิ่งก่อสร้าง
+                if (EventSystem.current.IsPointerOverGameObject())
+                    return;
+
                 CheckClickOnGround();
             }
 
+            // 3. ยกเลิกการสร้าง
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1))
                 CancelToBuild();
-
-
-
         }
+
         switch (unit.State)
         {
             case UnitState.MoveToBuild:
@@ -69,60 +68,90 @@ public class Builder : MonoBehaviour
                 BuildProgress();
                 break;
         }
-
-
     }
 
-    public void ToCreateNewBuilding(int i) //Start call from ActionManager UI Btns
+    public void ToCreateNewBuilding(int i)
     {
-        if (buildingList[i] == null)
-            return;
+        if (buildingList[i] == null) return;
 
         Building b = buildingList[i].GetComponent<Building>();
 
-        if (!unit.Factions.CheckBuildingCost(b)) //don't have enough resource to build
+        // เช็คทรัพยากร
+        if (!unit.Factions.CheckBuildingCost(b))
             return;
-        else
-        {
-            //Create ghost building at the mouse position
-            ghostBuilding = Instantiate(ghostBuildingList[i],
-                                        Input.mousePosition,
-                                        Quaternion.identity, unit.Factions  .GhostBuildingParent);
 
-            toBuild = true;
-            newBuilding = buildingList[i]; //Set prefab into new building
-            showGhost = true;
+        // ถ้ามี Ghost ตัวเก่าค้างอยู่ ให้ทำลายก่อนสร้างตัวใหม่
+        if (ghostBuilding != null)
+        {
+            Destroy(ghostBuilding);
         }
+
+        // สร้าง Ghost Building (เช็คว่า unit.Factions.GhostBuildingParent มีค่าหรือไม่ ถ้าไม่มีให้ใส่ null หรือ transform)
+        Transform parentTransform = (unit.Factions != null) ? unit.Factions.GhostBuildingParent : null;
+
+        // **จุดสำคัญ**: ใช้ Raycast หาจุดเริ่มต้น เพื่อไม่ให้ Ghost ไปโผล่ที่ (0,0,0) หรือจุดแปลกๆ
+        Vector3 spawnPos = Input.mousePosition;
+        Ray ray = CameraController.instance.Cam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000, LayerMask.GetMask("Ground")))
+        {
+            spawnPos = hit.point;
+        }
+
+        ghostBuilding = Instantiate(ghostBuildingList[i], spawnPos, Quaternion.identity, parentTransform);
+
+        toBuild = true;
+        newBuilding = buildingList[i];
+        showGhost = true;
     }
 
     private void GhostBuildingFollowsMouse()
     {
-        if (showGhost)
+        if (showGhost && ghostBuilding != null)
         {
             Ray ray = CameraController.instance.Cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
+            // ตรวจสอบ Layer "Ground" ให้แน่ใจว่าพื้นในฉากเป็น Layer นี้จริง
             if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Ground")))
             {
-                if (ghostBuilding != null)
-                {
-                    ghostBuilding.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
-                }
+                ghostBuilding.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
             }
         }
     }
 
+    // ... (ส่วนอื่นๆ ของโค้ดคงเดิม) ...
+
+    private void CheckClickOnGround()
+    {
+        if (ghostBuilding == null) return;
+
+        // เช็ค Component FindBuildingSite ว่าพื้นที่นี้สร้างได้ไหม
+        var findSite = ghostBuilding.GetComponent<FindBuildingSite>();
+        bool canBuild = (findSite != null) ? findSite.CanBuild : true; // ถ้าไม่มี script นี้ให้ถือว่าสร้างได้ไปก่อน (เพื่อทดสอบ)
+
+        Ray ray = CameraController.instance.Cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Ground")))
+        {
+            // ตรวจสอบ Tag ของพื้นที่คลิก
+            if (hit.collider.CompareTag("Ground") && canBuild)
+            {
+                CreateBuildingSite(hit.point);
+            }
+        }
+    }
+
+    // ... (ส่วนที่เหลือของโค้ดคงเดิม: CancelToBuild, CreateBuildingSite, MoveToBuild, etc.) ...
     private void CancelToBuild()
     {
         toBuild = false;
         showGhost = false;
 
         newBuilding = null;
-        Destroy(ghostBuilding);
+        if (ghostBuilding != null) Destroy(ghostBuilding);
         ghostBuilding = null;
-        //Debug.Log("Cancel Building");
     }
-
 
     public void BuilderStartFixBuilding(GameObject target)
     {
@@ -135,7 +164,7 @@ public class Builder : MonoBehaviour
         BuilderStartFixBuilding(buildingObj);
     }
 
-    public void CreateBuildingSite(Vector3 pos) //Set a building site
+    public void CreateBuildingSite(Vector3 pos)
     {
         if (ghostBuilding != null)
         {
@@ -143,60 +172,41 @@ public class Builder : MonoBehaviour
             ghostBuilding = null;
         }
 
-        //We use prefab position.y when instantiating.
         GameObject buildingObj = Instantiate(newBuilding,
                                             new Vector3(pos.x, newBuilding.transform.position.y, pos.z),
                                             Quaternion.identity);
 
-        newBuilding = null; //Clear 
+        newBuilding = null;
 
         Building building = buildingObj.GetComponent<Building>();
 
-        //Set building to be underground
         buildingObj.transform.position = new Vector3(buildingObj.transform.position.x,
                                     buildingObj.transform.position.y - building.IntoTheGround,
                                     buildingObj.transform.position.z);
-        buildingObj.transform.parent = unit.Factions.BuildingsParent.transform;
 
-        inProgressBuilding = buildingObj; //set a new clone building object to be a building in Unit's mind
-        unit.Factions.AliveBuildings.Add(building);
+        // เช็ค Factions ก่อนใช้งาน
+        if (unit.Factions != null)
+        {
+            buildingObj.transform.parent = unit.Factions.BuildingsParent.transform;
+            unit.Factions.AliveBuildings.Add(building);
+            building.Factions = unit.Factions;
+            unit.Factions.DeductBuildingCost(building);
+            if (unit.Factions == GameManager.instance.MyFaction)
+            {
+                MainUI.instance.UpdateAllResource(unit.Factions);
+            }
+        }
 
-        building.Factions = unit.Factions; //set a building's faction to be belong to this player
         building.IsFunctional = false;
         building.CurHP = 1;
 
-        unit.Factions.DeductBuildingCost(building);
+        toBuild = false;
+        showGhost = false;
 
-        toBuild = false; //Disable flag at the builder
-        showGhost = false; //Disable to show ghost building
-
-        if (unit.Factions == GameManager.instance.MyFaction)
-        {
-            MainUI.instance.UpdateAllResource(unit.Factions);
-        }
-        //Debug.Log("Building site created.");
-
-        //order builders to build together
-        StartConstruction(inProgressBuilding);
+        StartConstruction(inProgressBuilding = buildingObj);
     }
 
-    private void CheckClickOnGround()
-    {
-        Ray ray = CameraController.instance.Cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Ground")))
-        {
-            bool canBuild = ghostBuilding.GetComponent<FindBuildingSite>().CanBuild;
-            //Debug.Log(hit.collider.tag);
-            if ((hit.collider.tag == "Ground") && canBuild)
-            {
-                //Debug.Log("Click Ground to Build");
-                CreateBuildingSite(hit.point); //Create building site with 1 HP
-            }
-        }
-    }
-
+    // ... (ส่วน MoveToBuild, BuildProgress, OnTriggerStay, OnDestroy คงเดิม) ...
     private void MoveToBuild(GameObject b)
     {
         if (b == null)
@@ -214,15 +224,14 @@ public class Builder : MonoBehaviour
         unit.LookAt(inProgressBuilding.transform.position);
         Building b = inProgressBuilding.GetComponent<Building>();
 
-        //building is already finished
         if ((b.CurHP >= b.MaxHP) && b.IsFunctional)
         {
-           
-            inProgressBuilding = null; //Clear this job off his mind
+
+            inProgressBuilding = null;
             unit.SetState(UnitState.Idle);
             return;
         }
-        //constructing
+
         b.Timer += Time.deltaTime;
 
         if (b.Timer >= b.WaitTime)
@@ -242,11 +251,10 @@ public class Builder : MonoBehaviour
                 }
             }
 
-            if (b.IsFunctional == false) //if this building is being built, not being fixed
-                //Raise up building from the ground
+            if (b.IsFunctional == false)
                 inProgressBuilding.transform.position += new Vector3(0f, b.IntoTheGround / (b.MaxHP - 1), 0f);
 
-            if (b.CurHP >= b.MaxHP) //finish
+            if (b.CurHP >= b.MaxHP)
 
             {
                 b.CurHP = b.MaxHP;
@@ -257,13 +265,12 @@ public class Builder : MonoBehaviour
                     unit.AudioSourceRef.PlayOneShot(finishBuildingSound);
                 }
 
-                inProgressBuilding = null; //Clear this job off his mind
+                inProgressBuilding = null;
                 unit.SetState(UnitState.Idle);
 
-                unit.Factions.UpdateHousingLimit();
+                if (unit.Factions != null)
+                    unit.Factions.UpdateHousingLimit();
             }
-
-            
         }
     }
 
@@ -287,6 +294,4 @@ public class Builder : MonoBehaviour
         if (ghostBuilding != null)
             Destroy(ghostBuilding);
     }
-
-
 }

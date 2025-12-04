@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // จำเป็นต้องมีเพื่อเข้าถึง ScrollRect
 
 public class ActionManager : MonoBehaviour
 {
@@ -20,16 +20,25 @@ public class ActionManager : MonoBehaviour
 
     private void Start()
     {
-        // [เพิ่ม] เริ่มเกมมาสั่งซ่อน Panel ปุ่มกดไปก่อน
+        // [เพิ่ม] ป้องกันไม่ให้ ActionPanel ถูกลาก (Drag) ได้
+        // โดยการเช็คว่ามี ScrollRect หรือไม่ ถ้ามีให้ปิดการใช้งาน
+        ScrollRect scrollRect = GetComponent<ScrollRect>();
+        if (scrollRect != null)
+        {
+            scrollRect.horizontal = false;
+            scrollRect.vertical = false;
+            scrollRect.enabled = false;
+        }
+
+        // เริ่มเกมมาสั่งซ่อน Panel ปุ่มกดไปก่อน
         ClearAllInfo();
     }
+
     private void HideCreateUnitButtons()
     {
         for (int i = 0; i < unitBtns.Length; i++)
             unitBtns[i].gameObject.SetActive(false);
     }
-
-
 
     private void HideCreateBuildingButtons()
     {
@@ -37,13 +46,12 @@ public class ActionManager : MonoBehaviour
             buildingBtns[i].gameObject.SetActive(false);
     }
 
-
     public void ClearAllInfo()
     {
         HideCreateUnitButtons();
         HideCreateBuildingButtons();
 
-        // [เพิ่ม] สั่งซ่อน Panel หลักด้วย CanvasGroup
+        // สั่งซ่อน Panel หลักด้วย CanvasGroup
         if (cg != null)
         {
             cg.alpha = 0; // ปรับให้โปร่งใส
@@ -64,8 +72,6 @@ public class ActionManager : MonoBehaviour
 
     private void ShowCreateUnitButtons(Building b)
     {
-       
-
         if (b.IsFunctional)
         {
             for (int i = 0; i < b.UnitPrefabs.Length; i++)
@@ -77,7 +83,7 @@ public class ActionManager : MonoBehaviour
         }
     }
 
-    private void ShowCreateBuildingButtons(Unit u) //Showing list of buildings when selecting a single unit
+    private void ShowCreateBuildingButtons(Unit u)
     {
         if (u.IsBuilder)
         {
@@ -103,11 +109,9 @@ public class ActionManager : MonoBehaviour
 
     public void ShowCreateUnitMode(Building b)
     {
-       
-
-        HideCreateUnitButtons();     // เคลียร์ปุ่มเก่า
-        HideCreateBuildingButtons(); // เคลียร์ปุ่มเก่า
-        ShowPanel();                 // [เพิ่ม] สั่งเปิด Panel ขึ้นมา
+        HideCreateUnitButtons();
+        HideCreateBuildingButtons();
+        ShowPanel();
         ShowCreateUnitButtons(b);
     }
 
@@ -115,25 +119,20 @@ public class ActionManager : MonoBehaviour
     {
         HideCreateUnitButtons();
         HideCreateBuildingButtons();
-        ShowPanel();                // [เพิ่ม] สั่งเปิด Panel ขึ้นมา
+        ShowPanel();
         ShowCreateBuildingButtons(unit);
     }
 
-    public void CreateUnitButton(int n)//Map with Create Unit Btns
+    public void CreateUnitButton(int n)
     {
         Debug.Log("Create " + n);
-       Command.instance.CurBuilding.ToCreateUnit(n);
-
+        Command.instance.CurBuilding.ToCreateUnit(n);
     }
 
-    public void CreateBuildingButton(int n)//Map with Create Building Btns
+    public void CreateBuildingButton(int n)
     {
-        //Debug.Log("1 - Click Button: " + n);
-
         Unit unit = Command.instance.CurUnits[0];
         if (unit.IsBuilder)
-            unit.Builder.ToCreateNewBuilding(n );
-
+            unit.Builder.ToCreateNewBuilding(n);
     }
-
 }
