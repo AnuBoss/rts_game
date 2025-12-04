@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -8,6 +8,8 @@ public class InfoManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static InfoManager instance;
+    [Header("UI Control")]
+    [SerializeField] private GameObject infoPanel;
     [SerializeField] private Image unitPic, hpIcon, rsrcIcon, moveIcon, atkIcon, amrIcon, vslRngIcon, wpRngIcon;
     [SerializeField] private TextMeshProUGUI nameTxt, hpTxt, rsrcTxt, moveTxt, atkTxt, amrTxt, vslRngTxt, wpRngTxt;
 
@@ -33,8 +35,14 @@ public class InfoManager : MonoBehaviour
         unitPic.sprite = pic;
     }
 
+    private void OpenPanel()
+    {
+        if (infoPanel != null) infoPanel.SetActive(true);
+    }
     public void ShowAllInfo(Unit unit)
     {
+        OpenPanel(); // [เพิ่ม] สั่งเปิด
+
         SetPic(unit.UnitPic);
         nameTxt.text = unit.UnitName;
 
@@ -59,6 +67,8 @@ public class InfoManager : MonoBehaviour
 
     public void ShowAllInfo(Building building)
     {
+        OpenPanel();
+
         SetPic(building.StructurePic);
         nameTxt.text = building.StructureName;
 
@@ -68,6 +78,8 @@ public class InfoManager : MonoBehaviour
     
     public void ShowAllInfo(ResourceSource r)
     {
+        OpenPanel();
+
         SetPic(r.RsrcPic);
         nameTxt.text = r.RsrcName;
         hpIcon.color = Color.white;
@@ -79,6 +91,12 @@ public class InfoManager : MonoBehaviour
 
     public void ClearAllInfo()
     {
+        if (infoPanel != null)
+        {
+            infoPanel.SetActive(false);
+            return; // ปิดแล้วจบเลย ไม่ต้องไปเคลียร์ค่าข้างล่างก็ได้เพื่อประหยัดแรง
+        }
+
         //Clear Pic
         unitPic.color = Color.clear;
         nameTxt.text = "";
