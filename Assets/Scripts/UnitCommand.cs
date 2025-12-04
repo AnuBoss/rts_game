@@ -64,8 +64,6 @@ public class UnitCommand : MonoBehaviour
             {
                 case "Ground":
                     CommandToGround(hit, unitSelect.CurUnits);
-                    InfoManager.instance.ClearAllInfo();
-                    ActionManager.instance.ClearAllInfo();
                     break;
                 case "Resource":
                     ResourceCommand(hit,unitSelect.CurUnits);
