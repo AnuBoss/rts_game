@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum Nation
 {
-    Neutrl=0,
+    Neutrl = 0,
     Britain,
     Pirates,
     France,
@@ -60,7 +60,7 @@ public class Factions : MonoBehaviour
 
     [SerializeField] private GameObject[] unitPrefabs;
     public GameObject[] UnitPrefabs { get { return unitPrefabs; } }
-    
+
     private int unitLimit = 6; //Initial unit limit
     public int UnitLimit { get { return unitLimit; } }
     private int housingUnitNum = 5; //number of units per each housing
@@ -76,11 +76,12 @@ public class Factions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public bool CheckUnitCost(Unit unit)
     {
+        // ตรวจสอบ Unit Limit ก่อน
         if (aliveUnits.Count >= unitLimit)
             return false;
 
@@ -141,7 +142,7 @@ public class Factions : MonoBehaviour
 
         return true;
     }
-    
+
     public Vector3 GetHQSpawnPos()
     {
         foreach (Building b in aliveBuildings)
@@ -154,7 +155,7 @@ public class Factions : MonoBehaviour
         }
         return startPosition.position;
     }
-    
+
     public void GainResource(ResourceType resourceType, int amount)
     {
         switch (resourceType)
@@ -215,33 +216,46 @@ public class Factions : MonoBehaviour
         }
         return closest[UnityEngine.Random.Range(0, closest.Length)];
     }
-    
+
     public void UpdateHousingLimit()
     {
         unitLimit = 6; //starting unit Limit
 
+        Debug.Log($"[{nation}] UpdateHousingLimit - Starting with base limit: {unitLimit}");
+        int housingCount = 0;
+
         foreach (Building b in aliveBuildings)
         {
+            if (b == null)
+                continue;
+
+            Debug.Log($"[{nation}] Checking building: {b.StructureName}, IsHousing: {b.IsHousing}, IsFunctional: {b.IsFunctional}");
+
             if (b.IsHousing && b.IsFunctional)
             {
+                housingCount++;
                 unitLimit += housingUnitNum;
+                Debug.Log($"[{nation}] Housing #{housingCount} added! New limit: {unitLimit}");
             }
         }
+
+        Debug.Log($"[{nation}] Final - Total Housing: {housingCount}, Unit Limit: {unitLimit}");
 
         if (unitLimit >= 100)
             unitLimit = 100;
         else if (unitLimit < 0)
             unitLimit = 0;
 
-        if( this == GameManager.instance.MyFaction)
-        { 
-            MainUI.instance.UpdateAllResource(this); 
+        if (this == GameManager.instance.MyFaction)
+        {
+            MainUI.instance.UpdateAllResource(this);
         }
-            
+
     }
-    
+
     public bool CheckUnitCost(int i)
     {
+        // ตรวจสอบ Unit Limit ก่อน
         if (aliveUnits.Count == unitLimit)
             return false;
 

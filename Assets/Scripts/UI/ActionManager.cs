@@ -85,18 +85,25 @@ public class ActionManager : MonoBehaviour
 
     private void ShowCreateBuildingButtons(Unit u)
     {
-        if (u.IsBuilder)
+        if (u.IsBuilder && u.Factions != null)
         {
-            for (int i = 0; i < u.Builder.BuildingList.Length; i++)
+            // ใช้ Building Prefabs จาก Faction แทน
+            GameObject[] buildingPrefabs = u.Factions.BuildingPrefabs;
+
+            if (buildingPrefabs == null || buildingPrefabs.Length == 0)
+                return;
+
+            for (int i = 0; i < buildingPrefabs.Length && i < buildingBtns.Length; i++)
             {
                 buildingBtns[i].gameObject.SetActive(true);
 
-                if (u.Builder.BuildingList[i] != null)
+                if (buildingPrefabs[i] != null)
                 {
                     buildingBtns[i].GetComponent<Button>().interactable = true;
                     buildingBtns[i].image.color = Color.white;
-                    Building building = u.Builder.BuildingList[i].GetComponent<Building>();
-                    buildingBtns[i].image.sprite = building.StructurePic;
+                    Building building = buildingPrefabs[i].GetComponent<Building>();
+                    if (building != null)
+                        buildingBtns[i].image.sprite = building.StructurePic;
                 }
                 else
                 {

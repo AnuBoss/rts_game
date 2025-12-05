@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +28,7 @@ public class Building : Structure
 
     [SerializeField] private float intoTheGround = 5f;
     public float IntoTheGround { get { return intoTheGround; } }
-    
+
     public GameObject[] UnitPrefabs { get { return unitPrefabs; } }
 
     private float timer = 0f; //Constructing timer
@@ -37,44 +37,44 @@ public class Building : Structure
     public float WaitTime { get { return waitTime; } set { waitTime = value; } }
 
     [SerializeField] private bool isHousing;
-    public  bool IsHousing
+    public bool IsHousing
     {
         get { return isHousing; }
     }
     [SerializeField] private bool isBarrack;
-    public  bool IsBarrack
+    public bool IsBarrack
     {
         get { return isBarrack; }
     }
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
-        
-            ToCreateUnit(0);
-            if ((recruitList.Count > 0) && (recruitList[0] != null))
-            {
-                unitTimer += Time.deltaTime;
-                curUnitWaitTime = recruitList[0].UnitWaitTime;
-                if (unitTimer >= curUnitWaitTime)
-                {
-                    curUnitProgress++;
-                    unitTimer = 0f;
 
-                    if (curUnitProgress >= 100 && (faction.AliveUnits.Count < faction.UnitLimit))
-                    {
-                        curUnitProgress = 0;
-                        curUnitWaitTime = 0f;
-                        CreateUnitCompleted();
-                    }
+            ToCreateUnit(0);
+        if ((recruitList.Count > 0) && (recruitList[0] != null))
+        {
+            unitTimer += Time.deltaTime;
+            curUnitWaitTime = recruitList[0].UnitWaitTime;
+            if (unitTimer >= curUnitWaitTime)
+            {
+                curUnitProgress++;
+                unitTimer = 0f;
+
+                if (curUnitProgress >= 100 && (faction.AliveUnits.Count < faction.UnitLimit))
+                {
+                    curUnitProgress = 0;
+                    curUnitWaitTime = 0f;
+                    CreateUnitCompleted();
                 }
             }
+        }
         if (Input.GetKeyDown(KeyCode.F))
 
             ToCreateUnit(1);
@@ -135,6 +135,14 @@ public class Building : Structure
         if (unit == null)
             return;
 
+        // เช็ค Unit Limit รวมทั้งยูนิตที่กำลังสร้างอยู่
+        int totalUnits = faction.AliveUnits.Count + recruitList.Count;
+        if (totalUnits >= faction.UnitLimit)
+        {
+            Debug.LogWarning($"Cannot recruit unit - Unit limit reached! (Alive: {faction.AliveUnits.Count}, Recruiting: {recruitList.Count}, Limit: {faction.UnitLimit})");
+            return;
+        }
+
         if (!faction.CheckUnitCost(unit)) //not enough resources
             return;
 
@@ -153,12 +161,30 @@ public class Building : Structure
 
     public void CreateUnitCompleted()
     {
+        // เช็คอีกครั้งว่ายังสร้างได้ไหม (ป้องกันกรณีสั่งสร้างหลายตัวติดๆกัน)
+        if (faction.AliveUnits.Count >= faction.UnitLimit)
+        {
+            Debug.LogWarning($"Cannot create unit - Unit limit reached! ({faction.AliveUnits.Count}/{faction.UnitLimit})");
+
+            // คืนทรัพยากรให้ผู้เล่น
+            if (recruitList.Count > 0 && recruitList[0] != null)
+            {
+                faction.GainResource(ResourceType.Food, recruitList[0].UnitCost.food);
+                faction.GainResource(ResourceType.Wood, recruitList[0].UnitCost.wood);
+                faction.GainResource(ResourceType.Gold, recruitList[0].UnitCost.gold);
+                faction.GainResource(ResourceType.Stone, recruitList[0].UnitCost.stone);
+
+                recruitList.RemoveAt(0); // ลบออกจาก recruit list
+            }
+            return;
+        }
+
         int id = recruitList[0].ID;
 
         if (faction.UnitPrefabs[id] == null)
             return;
 
-        GameObject unitObj = Instantiate(faction.UnitPrefabs[id], spawnPoint.position, Quaternion.Euler(0f, 180f, 0f),faction.UnitsParent);
+        GameObject unitObj = Instantiate(faction.UnitPrefabs[id], spawnPoint.position, Quaternion.Euler(0f, 180f, 0f), faction.UnitsParent);
 
         recruitList.RemoveAt(0);
 

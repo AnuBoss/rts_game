@@ -8,9 +8,9 @@ public class Builder : MonoBehaviour
     [SerializeField] private bool toBuild = false;
     [SerializeField] private bool showGhost = false;
 
-    [SerializeField] private GameObject[] buildingList;
-    public GameObject[] BuildingList { get { return buildingList; } }
-    [SerializeField] private GameObject[] ghostBuildingList;
+    // ไม่ใช้อีกต่อไป - ใช้ของ Faction แทน
+    // [SerializeField] private GameObject[] buildingList;
+    // [SerializeField] private GameObject[] ghostBuildingList;
 
     [SerializeField] private GameObject newBuilding;
     public GameObject NewBuilding { get { return newBuilding; } set { newBuilding = value; } }
@@ -72,9 +72,13 @@ public class Builder : MonoBehaviour
 
     public void ToCreateNewBuilding(int i)
     {
-        if (buildingList[i] == null) return;
+        // ใช้ Building Prefabs จาก Faction แทน
+        if (unit.Factions == null) return;
+        if (unit.Factions.BuildingPrefabs == null || unit.Factions.BuildingPrefabs.Length == 0) return;
+        if (i >= unit.Factions.BuildingPrefabs.Length) return;
+        if (unit.Factions.BuildingPrefabs[i] == null) return;
 
-        Building b = buildingList[i].GetComponent<Building>();
+        Building b = unit.Factions.BuildingPrefabs[i].GetComponent<Building>();
 
         // เช็คทรัพยากร
         if (!unit.Factions.CheckBuildingCost(b))
@@ -97,10 +101,14 @@ public class Builder : MonoBehaviour
             spawnPos = hit.point;
         }
 
-        ghostBuilding = Instantiate(ghostBuildingList[i], spawnPos, Quaternion.identity, parentTransform);
+        // ใช้ Ghost Building Prefabs จาก Faction
+        if (unit.Factions.GhostBuildingPrefabs != null && i < unit.Factions.GhostBuildingPrefabs.Length && unit.Factions.GhostBuildingPrefabs[i] != null)
+        {
+            ghostBuilding = Instantiate(unit.Factions.GhostBuildingPrefabs[i], spawnPos, Quaternion.identity, parentTransform);
+        }
 
         toBuild = true;
-        newBuilding = buildingList[i];
+        newBuilding = unit.Factions.BuildingPrefabs[i]; // ใช้จาก Faction
         showGhost = true;
     }
 
