@@ -81,6 +81,9 @@ public class Factions : MonoBehaviour
 
     public bool CheckUnitCost(Unit unit)
     {
+        if (aliveUnits.Count >= unitLimit)
+            return false;
+
         if (food < unit.UnitCost.food)
             return false;
 
@@ -239,6 +242,9 @@ public class Factions : MonoBehaviour
     
     public bool CheckUnitCost(int i)
     {
+        if (aliveUnits.Count == unitLimit)
+            return false;
+
         Unit unit = unitPrefabs[i].GetComponent<Unit>();
 
         if (unit == null)
