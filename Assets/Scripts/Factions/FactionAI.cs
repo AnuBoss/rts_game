@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,24 +27,27 @@ public class FactionAI : MonoBehaviour
     {
         support = gameObject.GetComponent<AISupport>();
         InvokeRepeating("Check", 0.0f, checkRate);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
     private void Check()
     {
+        // เพิ่มการเช็ค null
+        if (faction == null || faction.AliveBuildings == null)
+            return;
+
         if (faction.AliveBuildings.Count == 0) // if all buildings are destroyed, return
             return;
 
         //Create Workers
         if (curHQ != null)
         {
-            if ((support.Workers.Count + curHQ.CheckNumInRecruitList(0)) < 6 ) // if there are less than 5 units, keep recruiting Workers
+            if ((support.Workers.Count + curHQ.CheckNumInRecruitList(0)) < 6) // if there are less than 5 units, keep recruiting Workers
             {
                 // if we can recruit a new worker/builder, do so
                 if (faction.CheckUnitCost(0))
@@ -61,17 +64,24 @@ public class FactionAI : MonoBehaviour
                     curBarrack.ToCreateUnit(0); // recruits main fighter
             }
         }
+
         UpdateImportantBuilding();
-        WorkerFindResource(ResourceType.Wood,3); 
+        WorkerFindResource(ResourceType.Wood, 3);
         WorkerFindResource(ResourceType.Food, 2);
-
-
     }
 
     private void UpdateImportantBuilding()
     {
+        
+        if (faction == null || faction.AliveBuildings == null)
+            return;
+
         foreach (Building b in faction.AliveBuildings)
         {
+           
+            if (b == null)
+                continue;
+
             if (!b.IsFunctional)
                 continue;
 
@@ -85,11 +95,23 @@ public class FactionAI : MonoBehaviour
 
     private void WorkerFindResource(ResourceType rType, int n)
     {
+       
+        if (support == null || support.Workers == null)
+            return;
+
         foreach (GameObject workerObj in support.Workers)
         {
+           
+            if (workerObj == null)
+                continue;
+
             Unit u = workerObj.GetComponent<Unit>();
 
-            if (u.State == UnitState.Idle) //he's idle
+           
+            if (u == null)
+                continue;
+
+            if (u.State == UnitState.Idle) 
             {
                 ResourceSource r = faction.GetClosestResource(u.transform.position, rType);
 
@@ -99,9 +121,9 @@ public class FactionAI : MonoBehaviour
                 u.Worker.ToGatherResource(r, r.transform.position);
                 n--;
             }
-            else if (u.Worker.CurResourceSource != null) //he's has a job
+            else if (u.Worker != null && u.Worker.CurResourceSource != null) 
             {
-                if (u.Worker.CurResourceSource.RsrcType == rType) //he is already gathering this kind of resource
+                if (u.Worker.CurResourceSource.RsrcType == rType) 
                     n--;
             }
 
@@ -109,6 +131,4 @@ public class FactionAI : MonoBehaviour
                 break;
         }
     }
-
-
 }
